@@ -12,6 +12,16 @@ pg.init()
 screen_width = 450
 screen_height = 450
 
+example_board = [  0,6,9,8,0,0,0,0,0,
+                   3,0,4,7,0,6,5,0,0,
+                   2,0,0,5,9,0,6,0,0,
+                   0,2,0,0,0,0,0,1,0,
+                   9,0,0,1,0,7,0,0,8,
+                   0,3,0,0,0,0,0,4,0,
+                   0,0,2,0,5,4,0,0,7,
+                   0,0,3,2,0,1,4,0,5,
+                   0,0,0,0,0,9,2,6,0]
+
 class Solver:
     def __init__(self):
         self.board = Board()
@@ -22,18 +32,14 @@ class Solver:
         # populate board
         
         for i in range(81):
-            s = str(numpy.random.choice(numpy.arange(0, 10), p=[0.7,0.02,0.02,0.02,0.02,0.02,0.1,0.05,0.025,0.025]))
-            if s != '0':
-                self.board.update(i, s)
+            self.board.update(i, example_board[i])
     def step(self): # perform next step in the solution
         # if the current square is complete, search for the next blank space
         if self.square_complete:
             while self.index < 81:
                 val = self.board.get(self.index)
                 if val == 0:
-                    # once found add the index into
-                    # ...the stack and turn square_complete to False
-                    self.blank.append(self.index)
+                    # this is a square we need to work on, so turn square_complete to False
                     square_complete = False
                     break
                 self.index += 1
@@ -43,6 +49,8 @@ class Solver:
             if self.is_valid_square(self.index):
                 # set square_complete to true
                 square_complete = True
+                # add to the stack to come back to later if needed
+                self.blank.append(self.index)
             elif val == 9:
                 if not self.blanks:
                     self.invalid == True
@@ -50,11 +58,17 @@ class Solver:
                     self.index = self.blank.pop()
             else:
                 # set blank and go to the previous index in the stack (pop from the stack)
-                self.board.update(self.index, str(val + 1))
+                self.board.update(self.index, val + 1)
 
-    def is_valid_square(self, i):
+    def is_valid_square(self, index):
         if self.board.get(i) == 0:
             return False
+        value = self.board.get(index)
+        col = index % 9
+        row = index / 9
+        for i in range(9):
+            # board[0][col]  board[index % 9][index / 9]
+            if col != i and value == self.board.get()
         pass
 
     def draw(self, window):
@@ -79,11 +93,11 @@ def main():
 
         window.fill(pg.Color('white'))
 
-        if not solver.solved():
-            solver.step()
+        #if not solver.solved():
+        #    solver.step()
 
         solver.draw(window)
         pg.display.update()
-        pg.time.delay(int(150 * 1.5))
+        pg.time.delay(int(150))
 
 main()

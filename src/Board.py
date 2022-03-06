@@ -9,10 +9,13 @@ class Board:
             for j in range(9):
                 self.board.append(Square(i * 50, j * 50))
                 k += 1
+                
     def update(self, i, val):
-        self.board[i].update(val)
+        self.board[i].update(str(val))
+
     def get(self, i):
         return int(self.board[i])
+
     def draw(self, window):
         for square in self.board:
             square.draw(window)
