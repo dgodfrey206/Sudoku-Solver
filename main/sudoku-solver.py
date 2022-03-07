@@ -1,4 +1,4 @@
-import pygame
+import pygame as pg
 from Solver import Solver
 
 window = pg.display.set_mode((screen_width, screen_height))
