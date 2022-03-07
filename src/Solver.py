@@ -17,9 +17,9 @@ class Solver:
         self.valid = True # the board can be solved
         self.square_complete = True
         self.stack = [] # stack; contains the index of squares to be worked on
+        
         # populate board
         
-        k = 0
         for i in range(81):
             self.board.update(i, example_board[i])
 
@@ -115,7 +115,6 @@ class Solver:
                     for j in range(6, 9):
                         if (i, j) != (row, col) and value == self.board.get_xy(i, j):
                             return False
-                            
         return True
 
     def draw(self, window):
