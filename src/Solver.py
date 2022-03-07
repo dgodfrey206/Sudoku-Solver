@@ -1,10 +1,4 @@
 from Board import Board
-from Square import Square
-
-pg.init()
-
-screen_width = 450
-screen_height = 450
 
 example_board = [  0,6,9,8,0,0,0,0,0,
                    3,0,4,7,0,6,5,0,0,

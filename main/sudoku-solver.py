@@ -1,8 +1,13 @@
 import pygame as pg
-from Solver import Solver
-
 import sys
 sys.path.append('../src')
+
+from Solver import Solver
+
+pg.init()
+
+screen_width = 450
+screen_height = 450
 
 window = pg.display.set_mode((screen_width, screen_height))
 pg.display.set_caption('Sudoku Solver')
