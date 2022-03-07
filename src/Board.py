@@ -1,5 +1,4 @@
 from Square import Square
-import random
 
 class Board:
     def __init__(self, w=9, h=9):
