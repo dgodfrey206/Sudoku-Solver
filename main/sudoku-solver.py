@@ -1,6 +1,9 @@
 import pygame as pg
 from Solver import Solver
 
+import sys
+sys.path.append('../src')
+
 window = pg.display.set_mode((screen_width, screen_height))
 pg.display.set_caption('Sudoku Solver')
 clock = pg.time.Clock()
