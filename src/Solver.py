@@ -11,17 +11,16 @@ example_board = [  0,6,9,8,0,0,0,0,0,
                    0,0,0,0,0,9,2,6,0]
 
 class Solver:
-    def __init__(self):
+    def __init__(self, b=example_board):
         self.board = Board()
         self.index = 0
         self.valid = True # the board can be solved
-        self.square_complete = True
         self.stack = [] # stack; contains the index of squares to be worked on
         # populate board
         
         k = 0
         for i in range(81):
-            self.board.update(i, example_board[i])
+            self.board.update(i, b[i])
 
         self.index = self.find_next_blank(0)
         if self.index == -1:
