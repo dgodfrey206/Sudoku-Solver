@@ -1,3 +1,4 @@
+from math import fabs
 import sys
 sys.path.append('../src')
 
@@ -61,15 +62,68 @@ class Solver:
                 self.board.update(self.index, val + 1)
 
     def is_valid_square(self, index):
-        if self.board.get(i) == 0:
+        if self.board.get(index) == 0:
             return False
         value = self.board.get(index)
-        col = index % 9
+
         row = index / 9
+        col = index % 9
+        
         for i in range(9):
-            # board[0][col]  board[index % 9][index / 9]
-            if col != i and value == self.board.get()
-        pass
+            if i != col and value == self.board.get_xy(row, i):
+                return False
+            if i != col and value == self.board.get_xy(i, col):
+                return False
+
+        if row < 3:
+            if col < 3:
+                for i in range(3):
+                    for j in range(3, 6):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            if col < 6:
+                for i in range(3):
+                    for j in range(6, 3):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            else:
+                for i in range(3):
+                    for j in range(6, 9):
+                        if value == self.board.get_xy(i, j):
+                            return False
+        if row < 6:
+            if col < 3:
+                for i in range(3, 6):
+                    for j in range(0, 3):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            if col < 6:
+                for i in range(3, 6):
+                    for j in range(3, 6):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            else:
+                for i in range(3, 6):
+                    for j in range(6, 3):
+                        if value == self.board.get_xy(i, j):
+                            return False
+        else:
+            if col < 3:
+                for i in range(6, 9):
+                    for j in range(0, 3):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            if col < 6:
+                for i in range(6, 9):
+                    for j in range(3, 6):
+                        if value == self.board.get_xy(i, j):
+                            return False
+            else:
+                for i in range(6, 9):
+                    for j in range(6, 9):
+                        if value == self.board.get_xy(i, j):
+                            return False
+        return True
 
     def draw(self, window):
         self.board.draw(window)
