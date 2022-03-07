@@ -1,14 +1,16 @@
 from Board import Board
 
-example_board = [  0,6,9,8,0,0,0,0,0,
-                   3,0,4,7,0,6,5,0,0,
-                   2,0,0,5,9,0,6,0,0,
-                   0,2,0,0,0,0,0,1,0,
-                   9,0,0,1,0,7,0,0,8,
-                   0,3,0,0,0,0,0,4,0,
-                   0,0,2,0,5,4,0,0,7,
-                   0,0,3,2,0,1,4,0,5,
-                   0,0,0,0,0,9,2,6,0]
+example_board = [  
+    1,9,0,0,2,0,5,0,8,
+    0,6,7,0,0,0,0,4,0,
+    0,0,4,6,8,3,0,9,0,
+    3,0,0,7,0,0,2,0,9,
+    0,0,0,1,0,0,6,0,5,
+    0,0,0,5,9,8,0,0,4,
+    4,0,5,8,0,0,9,0,6,
+    2,0,6,0,4,0,0,5,1,
+    9,0,1,0,0,6,0,7,0
+]
 
 class Solver:
     def __init__(self, b=example_board):
@@ -16,7 +18,7 @@ class Solver:
         self.index = 0
         self.valid = True # the board can be solved
         self.stack = [] # stack; contains the index of squares to be worked on
-        
+        self.stack_idx = -1 # current element in stack
         # populate board
         
         for i in range(81):
@@ -25,8 +27,6 @@ class Solver:
         self.index = self.find_next_blank(0)
         if self.index == -1:
             self.valid = False
-        else:
-            self.stack.append(self.index)
 
     def find_next_blank(self, i):
         while i < 81 and self.board.get(i) != 0:
@@ -34,21 +34,21 @@ class Solver:
         return i if i < 81 else -1
             
     def step(self): # perform next step in the solution
-        self.index = self.stack[-1]
         val = self.board.get(self.index)
+        self.board.update(self.index, val + 1)
 
-        if val != 9:
-            self.board.update(self.index, val + 1)
-            if self.is_valid_square(self.index):
-                self.index = self.find_next_blank(self.index)
-                if self.index != -1:
-                    self.stack.append(self.index)
-        else:
+        if self.is_valid_square(self.index):
+            self.stack.append(self.index)
+            self.index = self.find_next_blank(self.index)
+        elif val + 1 == 9:
             if not self.stack:
-                valid = False
+                self.valid = False
             else:
-                self.board.update(self.index, 0)
-                self.index = self.stack.pop()
+                while len(self.stack) >= 0 and self.board.get(self.index) == 9:
+                    self.board.update(self.index, 0)
+                    self.index = self.stack.pop()
+                if self.board.get(self.index) == 9:
+                    self.valid = False
 
 
     def is_valid_square(self, index):

@@ -9,8 +9,9 @@ class Square:
         self.y = y
         self.a = a # length of a side
         self.bgcolor = pg.Color('black')
+        self.textcolor = pg.Color('black')
         self.text = text
-        self.text_surface = FONT.render(text, True, pg.Color('black'))
+        self.text_surface = FONT.render(text, True, self.textcolor)
         self.rect = pg.Rect(x, y, self.a, self.a)
 
     def size(self):
@@ -18,7 +19,10 @@ class Square:
 
     def update(self, text):
         self.text = text
-        self.text_surface = FONT.render(text, True, pg.Color('black'))
+        self.init()
+
+    def init(self):
+        self.text_surface = FONT.render(self.text, True, self.textcolor)
 
     def draw(self, window):
         pg.draw.rect(window, self.bgcolor, self.rect, 1)
