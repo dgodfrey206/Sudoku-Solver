@@ -1,13 +1,9 @@
-from math import fabs
 import sys
-import pdb
 sys.path.append('../src')
 
 import pygame as pg
 from Board import Board
 from Square import Square
-
-import numpy
 
 pg.init()
 
