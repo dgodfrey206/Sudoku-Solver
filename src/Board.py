@@ -4,23 +4,24 @@ import random
 class Board:
     def __init__(self):
         self.board = []
-        k = 0
-        for i in range(9):
-            for j in range(9):
-                self.board.append(Square(i * 50, j * 50))
-                k += 1
+        self.width = 9
+        self.height = 9
+        
+        for w in range(self.width):
+            for h in range(self.height):
+                self.board.append(Square(h * 50, w * 50))
 
     def update(self, index, val):
         self.board[index].update(str(val))
 
     def update_xy(self, i, j, val):
-        self.board[(i * 9) + j].update(str(val))
+        self.board[(i * self.width) + j].update(str(val))
 
     def get(self, index):
-        return int(self.board[index])
+        return int(self.board[index].text)
 
     def get_xy(self, i, j):
-        return int(self.board[(i * 9) + j])
+        return int(self.board[(i * self.width) + j].text)
 
     def draw(self, window):
         for square in self.board:

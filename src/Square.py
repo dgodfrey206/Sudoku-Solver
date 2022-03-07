@@ -22,5 +22,6 @@ class Square:
 
     def draw(self, window):
         pg.draw.rect(window, self.bgcolor, self.rect, 1)
-        window.blit(self.text_surface, (self.x + self.a / 2 - 5, self.y + self.a / 2 - 5))
+        if self.text != '0':
+            window.blit(self.text_surface, (self.x + self.a / 2 - 5, self.y + self.a / 2 - 5))
         
