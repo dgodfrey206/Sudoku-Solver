@@ -140,7 +140,6 @@ clock = pg.time.Clock()
 
 def main():
     solver = Solver()
-    board = Board()
     run = True
     while run:
         clock.tick(60)
