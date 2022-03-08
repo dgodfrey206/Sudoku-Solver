@@ -10,7 +10,7 @@ This is an object oriented program. It divides the squares into its own class, a
 
 # Improvements
 
-Some features that I think would be interesting to add on is the option for the user to enter their own Sudoku problem. I was thinking that the user could enter a command-line argument to enable that option, something like `python sudoku-solver.py --manual`.
+Some features that I think would be interesting to add on is the option for the user to enter their own Sudoku problem. I was thinking that the user could enter a command-line argument to enable that option, something like `python sudoku-solver.py --manual`. Either that or we expand the size of the window and add an option for that.
 
 # My Thoughts
 
