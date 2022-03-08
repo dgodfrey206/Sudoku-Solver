@@ -1,56 +1,53 @@
 from Board import Board
 
-example_board = [  
-    1,9,0,0,2,0,5,0,8,
-    0,6,7,0,0,0,0,4,0,
-    0,0,4,6,8,3,0,9,0,
-    3,0,0,7,0,0,2,0,9,
-    0,0,0,1,0,0,6,0,5,
-    0,0,0,5,9,8,0,0,4,
-    4,0,5,8,0,0,9,0,6,
-    2,0,6,0,4,0,0,5,1,
-    9,0,1,0,0,6,0,7,0
-]
-
 class Solver:
-    def __init__(self, b=example_board):
+    def __init__(self, b):
         self.board = Board()
-        self.index = 0
+        self.index = -2 # the current square being looked at on the board (-2 because -1 is 
+                        # used for another check)
         self.valid = True # the board can be solved
         self.stack = [] # stack; contains the index of squares to be worked on
-        self.stack_idx = -1 # current element in stack
+
         # populate board
         
         for i in range(81):
             self.board.update(i, b[i])
 
-        self.index = self.find_next_blank(0)
-        if self.index == -1:
-            self.valid = False
-
+    # Go through the board for the next blank square
     def find_next_blank(self, i):
         while i < 81 and self.board.get(i) != 0:
             i += 1
         return i if i < 81 else -1
             
     def step(self): # perform next step in the solution
+        # If index < 0, this is the first iteration, so look for the next blank square 
+        if self.index < 0:
+            self.index = self.find_next_blank(0)
+            if self.index < 0:
+                return
+        # increase square value by 1
         val = self.board.get(self.index)
         self.board.update(self.index, val + 1)
 
         if self.is_valid_square(self.index):
+            # add current square to stack and move to the next blank square
             self.stack.append(self.index)
             self.index = self.find_next_blank(self.index)
         elif val + 1 == 9:
             if not self.stack:
                 self.valid = False
             else:
+                # continue to pop the stack until we find a square with a value under 9
+                # A square with a value of 9 will backtrack so they need to be skipped
                 while len(self.stack) >= 0 and self.board.get(self.index) == 9:
                     self.board.update(self.index, 0)
                     self.index = self.stack.pop()
+                # No square to backtrack to, this board can't be solved
                 if self.board.get(self.index) == 9:
                     self.valid = False
 
 
+    # Goes through each row, column, and 3x3 subgrid and checks for duplicates
     def is_valid_square(self, index):
         if not 0 <= index < 81:
             return False
