@@ -6,7 +6,7 @@ This is a code-up animation for solving Sodoku. It shows you how each square is 
 
 # Outline
 
-This is an object oriented program. It divides the squares into its own class, and the square instances are compiled into a grid contained in the `Board` class. Finally, a `Board` instance is used inside the `Solver` class for solving. 
+The program divides the squares into its own class, and the square instances are compiled into a grid contained in the `Board` class. Finally, a `Board` instance is used inside the `Solver` class for solving. 
 
 # Improvements
 
