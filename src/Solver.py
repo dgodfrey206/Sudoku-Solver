@@ -26,20 +26,20 @@ class Solver:
             if self.index < 0:
                 return
         # increase square value by 1
-        val = self.board.get(self.index)
-        self.board.update(self.index, val + 1)
+        new_val = 1 + self.board.get(self.index)
+        self.board.update(self.index, new_val)
 
         if self.is_valid_square(self.index):
             # add current square to stack and move to the next blank square
             self.stack.append(self.index)
             self.index = self.find_next_blank(self.index)
-        elif val + 1 == 9:
+        elif new_val == 9:
             if not self.stack:
                 self.valid = False
             else:
                 # continue to pop the stack until we find a square with a value under 9
                 # A square with a value of 9 will backtrack so they need to be skipped
-                while len(self.stack) >= 0 and self.board.get(self.index) == 9:
+                while self.stack and self.board.get(self.index) == 9:
                     self.board.update(self.index, 0)
                     self.index = self.stack.pop()
                 # No square to backtrack to, this board can't be solved
