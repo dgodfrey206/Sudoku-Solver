@@ -2,6 +2,8 @@
 
 This is a code-up animation for solving Sodoku. It shows you how each square is individually tested, as well as the backtracking that's needed when a solution at particular square isn't possible. Make sure you are in the `main` directory  when you run the program.
 
+<img>src/sudokugif_converted.gif</img>
+
     python sudoku-solver.py
 
 # Outline
