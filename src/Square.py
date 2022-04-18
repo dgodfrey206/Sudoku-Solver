@@ -3,6 +3,7 @@ pg.font.init()
 
 FONT = pg.font.Font(None, 32)
 
+# Square of side length `a` at position x,y
 class Square:
     def __init__(self, x, y, a=50, text=''):
         self.x = x
@@ -17,6 +18,7 @@ class Square:
     def size(self):
         return self.a
 
+    # change the text
     def update(self, text):
         self.text = text
         self.init()
@@ -26,6 +28,8 @@ class Square:
 
     def draw(self, window):
         pg.draw.rect(window, self.bgcolor, self.rect, 1)
+        # When the value is zero keep the square blank
         if self.text != '0':
+            # place the number at the center of the square
             window.blit(self.text_surface, (self.x + self.a / 2 - 5, self.y + self.a / 2 - 5))
         
