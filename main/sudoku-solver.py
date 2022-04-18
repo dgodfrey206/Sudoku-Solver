@@ -63,7 +63,7 @@ while run:
             # so that we can print out the modified board later
             solver.step()
     else:
-        print 'Not a solvable board: '
+        print 'Not a solvable board'
 
     solver.draw(window)
     pg.display.update()
