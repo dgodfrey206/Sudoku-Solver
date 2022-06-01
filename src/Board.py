@@ -1,4 +1,5 @@
 from Square import Square
+import pygame as pg
 
 class Board:
     def __init__(self, w=9, h=9):

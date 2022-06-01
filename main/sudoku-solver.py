@@ -54,7 +54,7 @@ while run:
             # Go through the internal stack of filled-in squares and highlight them
             while solver.stack:
                 idx = solver.stack.pop()
-                solver.board.get_square(idx).textcolor = pg.Color('darkblue')
+                solver.board.get_square(idx).rect.fill(pg.Color('lightblue'))
                 solver.board.get_square(idx).init()
         else:
             # The step() method increases the integer at the first blank square, checks if

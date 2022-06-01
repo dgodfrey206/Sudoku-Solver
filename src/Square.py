@@ -9,11 +9,12 @@ class Square:
         self.x = x
         self.y = y
         self.a = a # length of a side
-        self.bgcolor = pg.Color('black')
+        self.bgcolor = pg.Color('white')
         self.textcolor = pg.Color('black')
         self.text = text
         self.text_surface = FONT.render(text, True, self.textcolor)
-        self.rect = pg.Rect(x, y, self.a, self.a)
+        self.rect = pg.Surface((self.a, self.a))
+        self.rect.fill(self.bgcolor)
 
     def size(self):
         return self.a
@@ -27,7 +28,10 @@ class Square:
         self.text_surface = FONT.render(self.text, True, self.textcolor)
 
     def draw(self, window):
-        pg.draw.rect(window, self.bgcolor, self.rect, 1)
+        window.blit(self.rect, (self.x, self.y))
+        for i in range(10):
+            pg.draw.line(window, pg.Color('black'), (0, i * 50), (9 * self.a, i * 50), 2)
+            pg.draw.line(window, pg.Color('black'), (i * 50, 0), (i * 50, 9 * self.a), 2)
         # When the value is zero keep the square blank
         if self.text != '0':
             # place the number at the center of the square
