@@ -1,8 +1,8 @@
 # Sudoku Solver
 
-This is a code-up animation for solving Sodoku. It shows you how each square is individually tested, as well as the backtracking that's needed when a solution at particular square isn't possible. Make sure you are in the `main/` directory  when you run the program.
+This is a project to show animated solutions to Sodoku. It shows you how each square is individually tested, as well as the backtracking that's needed when a solution at particular square isn't possible. Make sure you are in the `main/` directory  when you run the program.
 
-![example](https://github.com/dgodfrey95/sudoku-project/blob/master/sudokufinal.gif)
+![example](https://github.com/dgodfrey206/sudoku-project/blob/master/sudokufinal.gif)
 
     python sudoku-solver.py
 
