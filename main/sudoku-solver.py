@@ -41,7 +41,7 @@ ex2 = [
 solver = Solver(ex1)
 run = True
 while run:
-    clock.tick(60)
+    #clock.tick(10)
     for event in pg.event.get():
         if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
             run = False
